@@ -22,3 +22,12 @@ UNSPLASH_CATEGORIES:
   ]
 
 CLIP_MODEL: ["openai/clip-vit-base-patch32"]
+
+MORE_INFO:
+  {
+    "zero_shot_classification_imagery":
+      "Because CLIP was trained on a diverse set of images and paired natural language
+      descriptions, CLIP is able to generalize its understanding to new and unseen data and correctly classify both
+      objective features *in the image* but also more abstract concepts *related to the image*. \n\nFeel free to experiment with more abstract concepts as
+      well as more obvious objective image features with this app",
+  }
