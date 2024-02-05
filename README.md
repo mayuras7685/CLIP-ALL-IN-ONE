@@ -3,6 +3,11 @@ This repository contains a streamlit application that demonstrates how to use Op
 
 Deployed App: https://clip-all-in-one.streamlit.app/
 
+- [x]  Zero-shot classification
+- [ ]  Image Clustering
+- [ ]  Text Clustering   
+- [ ]  Semantic Search
+
 # Installation
 Clone this repository
 ```bash
