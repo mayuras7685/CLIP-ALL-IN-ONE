@@ -3,7 +3,8 @@ This repository contains a streamlit application that demonstrates how to use Op
 
 Deployed App: https://clip-all-in-one.streamlit.app/
 
-- [x]  Zero-shot classification
+- [x]  Zero-shot image classification
+- [x]  Zero-shot text classification
 - [ ]  Image Clustering
 - [ ]  Text Clustering   
 - [ ]  Semantic Search
@@ -27,26 +28,3 @@ Navigate to the cloned directory and launch the Streamlit app with
 streamlit run clip_app.py
 ```
 Use the sidebar navigation menu to choose the task that you would like to explore.
-
-<hr>
-
-## Repo. structure
-```bash
-.
-├── assets
-│ ├── logo.png
-│ ├── logo.png
-│ ├── logo.png
-│ └── logo.png
-├── backend
-│ ├── init.py
-│ ├── clip_functions.py
-│ ├── config.yaml
-│ ├── dataframes.py
-│ ├── load.py
-│ ├── pipeline_img_cls.py
-│ ├── scraping.py
-│ └── show.py
-├── README.md
-└── clip_app.py
-```
