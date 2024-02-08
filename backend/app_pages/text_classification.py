@@ -4,7 +4,7 @@ from backend.show import tech_summary_side_bar
 
 
 def write(tokeniser, model):
-  tech_summary_side_bar('Zero_shot_classification_text')
+  tech_summary_side_bar('zero_shot_classification_text')
   st.title('Zero Shot Text Classification - BBC Headlines')
   st.markdown('#')
   st.markdown('#')
