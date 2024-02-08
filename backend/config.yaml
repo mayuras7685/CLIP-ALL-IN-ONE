@@ -21,6 +21,17 @@ UNSPLASH_CATEGORIES:
     "arts-culture",
   ]
 
+BBC_CATEGORIES:
+  [
+    "technology",
+    "business",
+    "politics",
+    "science_and_environment",
+    "health",
+    "education",
+    "entertainment_and_arts",
+  ]
+
 CLIP_MODEL: ["openai/clip-vit-base-patch32"]
 
 MORE_INFO:
@@ -30,4 +41,8 @@ MORE_INFO:
       descriptions, CLIP is able to generalize its understanding to new and unseen data and correctly classify both
       objective features *in the image* but also more abstract concepts *related to the image*. \n\nFeel free to experiment with more abstract concepts as
       well as more obvious objective image features with this app",
+    "zero_shot_classification_text":
+      "Because CLIP was trained on a diverse set of images and paired natural language
+      descriptions, CLIP is able to generalize its understanding to new and unseen data and correctly classify both
+      objective features but also more abstract concepts.",
   }
