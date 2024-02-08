@@ -18,6 +18,7 @@ def download_clip_model(clip_model='openai/clip-vit-base-patch32'):
     tokenizer = AutoTokenizer.from_pretrained(clip_model)
     return model, processor, tokenizer
 
+
 def _normalise_features(features):
     """
     Normalize input features by dividing them by their L2 norm.
@@ -52,7 +53,8 @@ def calculate_image_features(images: list, processor, model, normalise=True):
         return _normalise_features(image_features)
     else:
         return image_features
-    
+
+
 def calculate_text_features(texts: list, tokenizer, model, normalise=True):
     """
     Calculate text features for a given list of texts.
@@ -73,7 +75,8 @@ def calculate_text_features(texts: list, tokenizer, model, normalise=True):
         return _normalise_features(text_features)
     else:
         return text_features
-  
+    
+
 def _calculate_similarity(input_features, output_features):
     """
     Calculate the cosine similarity between input and output features.
@@ -87,6 +90,7 @@ def _calculate_similarity(input_features, output_features):
     """
     similarity = (100.0 * input_features @ output_features.T).softmax(dim=-1)
     return similarity
+
 
 def classify_images(text_inputs: list, images: list, processor, model, tokeniser):
     """
@@ -106,3 +110,27 @@ def classify_images(text_inputs: list, images: list, processor, model, tokeniser
     image_output_features = calculate_image_features(images, processor, model)
     predictions = _calculate_similarity(image_output_features, text_input_features)
     return predictions
+
+
+def classify_texts(text_inputs: list, texts: list, model, tokeniser):
+    """
+    Calculates the similarity between the text inputs and texts.
+
+    Args:
+    text_inputs (list): List of text inputs.
+    texts (list): List of texts.
+    model (transformers.CLIPModel): The CLIP model to use.
+    tokeniser (transformers.AutoTokenizer): The CLIP tokenizer to use.
+
+    Returns:
+        predictions: List of similarity scores between the text inputs and texts.
+    """
+    text_input_features = calculate_text_features(text_inputs, tokeniser, model)
+    text_output_features = calculate_text_features(texts, tokeniser, model)
+    predictions = _calculate_similarity(text_output_features, text_input_features)
+    return predictions
+
+
+
+
+
