@@ -45,4 +45,10 @@ MORE_INFO:
       "Because CLIP was trained on a diverse set of images and paired natural language
       descriptions, CLIP is able to generalize its understanding to new and unseen data and correctly classify both
       objective features but also more abstract concepts.",
+    "semantic_search":
+      "Semantic search is a search technique that aims to understand the meaning and context of
+      words and phrases in a search query rather than just returning results that are aligned with keywords.\n\n
+      CLIP enables a more intuitive and natural way of searching for images based on their content. One way of
+      achieving this is by calculating the cosine similarity between input embeddings (search query) and target
+      embeddings (images/other text) ",
   }

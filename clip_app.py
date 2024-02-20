@@ -8,6 +8,11 @@ from backend.load import load_yaml
 
 st.set_page_config(layout="wide")
 
+@st.cache_data
+def load_cached_embeddings(path: str):
+    df = pd.read_pickle(path)
+    return df
+
 config = load_yaml("config.yaml")
 clip_model = config['CLIP_MODEL'][0]
 model, processor, tokeniser = download_clip_model(clip_model) # load the model, processor and tokeniser - this is cached
