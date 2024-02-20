@@ -13,7 +13,7 @@ Deployed App: https://clip-all-in-one.streamlit.app/
 # Installation
 Clone this repository
 ```bash
-git clone https://github.com/kitsamho/clip_app
+git clone https://github.com/mayuras7685/CLIP-ALL-IN-ONE
 ```
 Install the required packages
 ```bash
