@@ -6,7 +6,7 @@ Deployed App: https://clip-all-in-one.streamlit.app/
 - [x]  Zero-shot image classification
 - [x]  Zero-shot text classification
 - [x]  Semantic Search
-- [ ]  Image Clustering
+- [x]  Image Clustering
 - [ ]  Text Clustering   
 
 
