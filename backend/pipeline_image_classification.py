@@ -14,7 +14,7 @@ def get_unsplash_images():
     unsplash_categories = config['UNSPLASH_CATEGORIES']
     unsplash_categories.sort()
     # get all the unsplash image category:url dictionary - this is cached
-    category_image_urls = scrape_unsplash_urls('https://unsplash.com/t/', unsplash_categories)
+    category_image_urls = scrape_unsplash_urls(unsplash_categories)
     return category_image_urls
 
 
@@ -33,26 +33,36 @@ def image_classification_loop(unsplash_urls: list, processor, model, tokenizer):
     Returns:
     None
     """
-
+    if not unsplash_urls:
+        st.error("No unsplash URLs available. Please check the unsplash scraping function.")
+        return
     # Split the layout into columns
     c1, c2, c3 = st.columns((3, 2, 5))
 
     # Display a random image if none is already being displayed
     c1.subheader('Random Image')
     if 'image_keep' not in st.session_state:
-        url = get_random_element(unsplash_urls) # get a random image
-        image = Image.open(requests.get(url, stream=True).raw) # open the image
-        st.session_state['image_keep'] = image # retain the image as a state
-        c1.image(image, width=400) # show the image
-    else:
-        c1.image(st.session_state['image_keep'], width=400)
+        try:
+            url = get_random_element(unsplash_urls) # get a random image
+            image = Image.open(requests.get(url, stream=True).raw) # open the image
+            st.session_state['image_keep'] = image # retain the image as a state
+        except requests.exceptions.RequestException as e:
+            st.error(f"Failed to fetch image from Unsplash: {e}")
+            return
+        
+    #     c1.image(image, width=400) # show the image
+    # else:
+    c1.image(st.session_state['image_keep'], width=400)
 
     # Prompt the user to enter labels for the image
     text_input_string = st.text_input('Choose some contrasting labels for this image - seperate labels with a comma \
                             e.g. "dog, cat" as this is how labels are split', 'dog, cat' )
-    labels = [i for i in text_input_string.split(",")]
+    # labels = [i for i in text_input_string.split(",")]
+    labels = [label.strip() for label in text_input_string.split(',') if label.strip()]
+    if not labels:
+        st.error("Please enter valid labels")
+        return
 
-    # Use the pre-trained model to predict the probabilities of the provided labels
     predictions = classify_images(labels, st.session_state['image_keep'], processor, model, tokenizer)
 
     # Display the predicted probabilities in a dataframe

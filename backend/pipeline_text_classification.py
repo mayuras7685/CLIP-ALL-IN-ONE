@@ -57,10 +57,21 @@ def text_classification_loop(bbc_headlines, tokeniser, model):
     c3.plotly_chart(plot_results(df, x_label='labels', y_label='probabilities', color_discrete_sequence='lightblue'))
 
     # Allow user to select a new headline to classify
+    if 'text_keep' not in st.session_state:
+        st.session_state['text_keep'] = None
+    if 'ui_refresh' not in st.session_state:
+        st.session_state['ui_refresh'] = False
+
     more_headlines = st.empty()
     next_headline = more_headlines.button('Get new headline')
     if next_headline:
-        st.session_state.pop('text_keep')
-        more_headlines.empty()
-        st.experimental_rerun()
+        st.session_state.pop('text_keep', None)
+        st.session_state['ui_refresh'] = False
+
+    if st.session_state.get('ui_refresh'):
+        st.session_state['ui_refresh'] = True
+        more_headlines.empty()  
+        # st.write("Here's the current headline!")
+        # more_headlines.empty()
+        # st.experimental_rerun()
     return

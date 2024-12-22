@@ -3,15 +3,19 @@ import streamlit as st
 from backend.app_pages import image_classification, text_classification, image_clustering, semantic_searh
 from backend.clip_functions import download_clip_model
 from backend.load import load_yaml
-from backend.app_pages import data
+# from backend.app_pages import data
 
 
 st.set_page_config(layout="wide")
 
 @st.cache_data
 def load_cached_embeddings(path: str):
-    df = pd.read_pickle(path)
-    return df
+    try:
+        df = pd.read_pickle(path)
+        return df
+    except FileNotFoundError:
+        st.error(f"Embedding file not found at {path}")
+        return None
 
 config = load_yaml("config.yaml")
 clip_model = config['CLIP_MODEL'][0]
@@ -28,6 +32,12 @@ navigation_buttons = {"Zero Shot Image Classification": image_classification,
 st.sidebar.title('CLIP Demo')
 selection = st.sidebar.radio("Go to", list(navigation_buttons.keys()))
 page = navigation_buttons[selection]
+
+if selection in ["Image Clustering", "Semantic Search"]:
+    df_cached_embeddings_rock = load_cached_embeddings("data\embeddings\image_clustering_embeds_rockarchive.pickle")
+    if df_cached_embeddings_rock is None:
+        st.stop()
+
 if selection == 'Zero Shot Image Classification':
     page.write(processor, model, tokeniser)
 
