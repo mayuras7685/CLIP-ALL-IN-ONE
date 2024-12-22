@@ -16,6 +16,11 @@ Get the Access Key from the unsplash
 - Register your app and get the Access Key
 - Create .env file (For eg. see the dotenv file in the repo)
 
+- .env should look like
+```bash
+ACCESS_KEY="<your key>"
+```
+
 Clone this repository
 ```bash
 git clone https://github.com/mayuras7685/CLIP-ALL-IN-ONE
